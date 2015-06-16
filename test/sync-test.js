@@ -6,52 +6,49 @@ var should = require('should');
 var fs = require('fs-extra');
 
 var main = require('../');
-var type = require('../lib/types/widget');
+var type = require('../lib/types/sync');
 
-var FIXTURE_PATH = path.join(__dirname, 'fixtures', 'widget');
+var FIXTURE_PATH = path.join(__dirname, 'fixtures', 'sync');
 var TMP_PATH = path.join(__dirname, '..', 'tmp');
-var NPM_PATH = path.join(TMP_PATH, 'npm', 'alloy-widget-com.foo');
+var NPM_PATH = path.join(TMP_PATH, 'npm', 'alloy-sync-restapi');
 var EXPECTED_ANALYZE = {
-	name: 'alloy-widget-com.foo',
-	version: '1.0.1',
-	description: 'description',
-	author: 'author',
-	license: 'license',
-	keywords: ['foo', 'bar'],
+	name: 'alloy-sync-restapi',
 	'appc-npm': {
 		target: {
-			alloy: 'app/widgets/com.foo'
+			alloy: 'app/lib/alloy/sync/'
 		},
-		ignore: ['package.json']
+		ignore: ['package.json', 'README.md']
 	}
 };
 var EXPECTED_PACKAGE = _.defaults({
+	version: '1.0.0',
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['foo', 'bar', 'appc-npm', 'alloy-widget']
+	keywords: ['appc-npm', 'alloy-sync']
 }, EXPECTED_ANALYZE);
 
-describe('lib/types/widget', function () {
+describe('lib/types/sync', function () {
 
 	before(function () {
 		fs.copySync(FIXTURE_PATH, NPM_PATH);
 		fs.outputFileSync(path.join(TMP_PATH, 'app', 'controllers', 'index.js'));
+		fs.outputFileSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'another.js'));
 		fs.outputJsonSync(path.join(TMP_PATH, 'package.json'), {
 			dependencies: {
-				'alloy-widget-com.foo': './npm/alloy-widget-com.foo'
+				'alloy-sync-restapi': './npm/alloy-sync-restapi'
 			}
 		});
 	});
 
 	after(function () {
-		fs.removeSync(TMP_PATH);
+		// fs.removeSync(TMP_PATH);
 	});
 
 	it('should analyze', function (done) {
 		should.exist(type.prefix);
 
-		type.prefix.should.be.a.String.eql('alloy-widget');
+		type.prefix.should.be.a.String.eql('alloy-sync');
 
 		return type.analyze(NPM_PATH, function (err, pkg) {
 
@@ -73,7 +70,7 @@ describe('lib/types/widget', function () {
 
 		return main({
 			src: NPM_PATH,
-			type: 'widget'
+			type: 'sync'
 
 		}, function (err, pkg) {
 
@@ -103,9 +100,11 @@ describe('lib/types/widget', function () {
 				return done(new Error(stderr));
 			}
 
-			fs.existsSync(path.join(TMP_PATH, 'app', 'widgets', 'com.foo', 'widget.json')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'widgets', 'com.foo', 'package.json')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'widgets', 'com.foo', 'appc-npm')).should.not.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'restapi.js')).should.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'another.js')).should.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'README.md')).should.not.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'package.json')).should.not.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'appc-npm')).should.not.be.true;
 
 			return done();
 		});

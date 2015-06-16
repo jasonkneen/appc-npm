@@ -1,5 +1,7 @@
 # Appcelerator NPM Distribution
-Package components for Appcelerator Titanium, Alloy and Arrow projects for distribution and dependencies via NPM.
+Package components for Appcelerator Titanium, Alloy and Arrow projects for distribution and dependency via NPM.
+
+* [Browse Appcelerator Components on NPM](https://www.npmjs.com/browse/keyword/appc-npm)
 
 ## Install
 
@@ -84,14 +86,14 @@ $ appc-npm widget
 ## Commands/Types
 You can use the following commands or types of components:
 
-### DONE: `widget`
-Alloy Widgets. Searches for `widget.json` to determine the base path and adds `controllers`, `views`, `styles`, `lib`, `assets` and `i18n` directories to the list of paths to copy to the project. The default package name is `alloy-widget-<id>` and the version is read from `widget.json` as well.
+### `widget`
+Alloy Widgets. Uses `widget.json` to populate the `package.json`, ignores that same file for the installer and uses `alloy-widget-<id>` as the package name.
 
-### TODO: `sync`
-Alloy sync adapters. Searches for the first `.js` to determine the base path and adds that file to the list of paths to copy to the project. The default package name is `alloy-sync-<filename>` and version is `1.0.0`.
+### `sync`
+Alloy sync adapters. Searches for the first `.js` and uses `alloy-sync-<filename>` as the package name and `1.0.0` for the version. All other files are ignored for the installer.
 
-### TODO `lib`
-Titanium, Alloy or Arrow CommonJS libraries. Searches for the first `.js` to determine the base path and adds that file to the list of paths to copy to the project. The default package name is `appc-lib-<filename>` and version is `1.0.0`.
+### `lib`
+Titanium, Alloy or Arrow CommonJS libraries. Searches for the first `.js` and uses `alloy-sync-<filename>` as the package name and `1.0.0` for the version. All other files are ignored for the installer.
 
 ### TODO: `module`
 Titanium modules. Searches for the most recent ZIP file and adds that file to the `files` field of the `package.json` so that only that file and our installer will be published to NPM. It also reads the `manifest` to use in the default package, which is `ti-module-<id>`, and for the version.

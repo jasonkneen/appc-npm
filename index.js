@@ -17,6 +17,7 @@ module.exports = function (opts, callback) {
 	var src = opts.src || process.cwd();
 	var type = opts.type;
 
+	var info;
 	var pkg = {};
 
 	var packagePath = path.join(src, 'package.json');
@@ -56,17 +57,18 @@ module.exports = function (opts, callback) {
 
 		},
 
-		copyInstaller: function (next) {
+		analyze: function (next) {
 
-			return fs.copy(path.join(__dirname, 'assets', 'appc-npm'), path.join(src, 'appc-npm'), function (err) {
+			return type.analyze(src, function (err, res) {
 
 				if (err) {
-					return next(new Error('Failed to copy the installer'));
+					return next(err);
 				}
+
+				info = res;
 
 				return next();
 			});
-
 		},
 
 		readPackage: function (next) {
@@ -93,35 +95,41 @@ module.exports = function (opts, callback) {
 		},
 
 		updatePackage: function (next) {
-			var mod;
 
-			return type.analyze(src, function (err, info) {
+			// don't overwrite...
+			_.defaults(pkg, info);
 
-				if (err) {
-					return next(err);
+			// only version, falling back to 1.0.0
+			pkg.version = info.version || pkg.version || '1.0.0';
+
+			// fallback for name
+			pkg.name = pkg.name || type.prefix + '-' + path.dirname(src);
+
+			if (typeof pkg.scripts !== 'object') {
+				pkg.scripts = {};
+			}
+
+			// don't overwrite postinstall
+			if (!pkg.scripts.postinstall) {
+				pkg.scripts.postinstall = 'node ./appc-npm';
+			}
+
+			// ensure keywords
+			if (!_.isArray(pkg.keywords)) {
+				pkg.keywords = ['appc-npm', type.prefix];
+
+			} else {
+
+				if (pkg.keywords.indexOf('appc-npm') === -1) {
+					pkg.keywords.push('appc-npm');
 				}
 
-				// don't overwrite...
-				_.defaults(pkg, info);
-
-				// only version, falling back to 1.0.0
-				pkg.version = info.version || pkg.version || '1.0.0';
-
-				// fallback for name
-				pkg.name = pkg.name || type.prefix + path.dirname(src);
-
-				if (typeof pkg.scripts !== 'object') {
-					pkg.scripts = {};
+				if (pkg.keywords.indexOf(type.prefix) === -1) {
+					pkg.keywords.push(type.prefix);
 				}
+			}
 
-				// don't overwrite postinstall
-				if (!pkg.scripts.postinstall) {
-					pkg.scripts.postinstall = 'node ./appc-npm';
-				}
-
-				return next();
-			});
-
+			return next();
 		},
 
 		writePackage: function (next) {
@@ -130,6 +138,19 @@ module.exports = function (opts, callback) {
 
 				if (err) {
 					return next(new Error('Failed to write package.json'));
+				}
+
+				return next();
+			});
+
+		},
+
+		copyInstaller: function (next) {
+
+			return fs.copy(path.join(__dirname, 'assets', 'appc-npm'), path.join(src, 'appc-npm'), function (err) {
+
+				if (err) {
+					return next(new Error('Failed to copy the installer'));
 				}
 
 				return next();
