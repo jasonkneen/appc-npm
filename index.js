@@ -154,6 +154,42 @@ module.exports = function (opts, callback) {
 
 		},
 
+		writeIgnore: function (next) {
+			var NPMignorePath = path.join(src, '.npmignore');
+			var ignore = pkg['appc-npm'].ignore;
+
+			// nothing to ignore
+			if (!_.isArray(ignore) || ignore.length === 0) {
+				return next();
+			}
+
+			var ignoreForNPM = _.without(ignore, 'package.json', 'appc-npm');
+
+			// nothing to ignore for NPM
+			if (ignoreForNPM.length === 0) {
+				return next();
+			}
+
+			return fs.exists(NPMignorePath, function (exists) {
+
+				// don't overwrite
+				if (exists) {
+					return next();
+				}
+
+				return fs.outputFile(NPMignorePath, ignoreForNPM.join('\n'), function (err) {
+
+					if (err) {
+						return next(new Error('Failed to write .npmignore'));
+					}
+
+					return next();
+				});
+
+			});
+
+		},
+
 		copyInstaller: function (next) {
 
 			return fs.copy(path.join(__dirname, 'assets', 'appc-npm'), path.join(src, 'appc-npm'), function (err) {

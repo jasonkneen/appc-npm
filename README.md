@@ -12,7 +12,7 @@ $ [sudo] npm install -g appc-npm
 ```
 
 ## Package & Publish
-Simply navigate to your Titanium module or library, Alloy widget, sync adapter, Arrow connector or other component and run the CLI with the command for that component:
+Simply navigate to your Titanium module or library, Alloy widget, sync adapter, Arrow connector or other component and run the CLI with the command for that component and optional path (defaulting to CWD).
 
 ```
 $ cd mywidget
@@ -107,6 +107,10 @@ Arrow connectors. Searches for `package.json` to determine the target for the in
 
 ### `module` ![TODO](https://img.shields.io/badge/TO-DO-green.svg?style=flat-square)
 Titanium modules. Searches for the most recent ZIP file and adds that file to the `files` field of the `package.json` so that only that file and our installer will be published to NPM. It also reads the `manifest` to use in the default package, which is `ti-module-<id>`, and for the version.
+
+## Module API
+
+You can also require `appc-npm` as a module, which is exactly [what the CLI does](bin/appc-npm).
 
 ## Test
 

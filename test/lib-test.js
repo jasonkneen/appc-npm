@@ -29,6 +29,7 @@ var EXPECTED_PACKAGE = _.defaults({
 	},
 	keywords: ['appcelerator', 'appc-npm', 'appc-lib', 'alloy', 'titanium', 'arrow']
 }, EXPECTED_ANALYZE);
+var EXPECTED_IGNORE = _.without(EXPECTED_PACKAGE['appc-npm'].ignore, 'package.json').join('\n');
 
 describe('lib/types/lib', function () {
 
@@ -85,6 +86,12 @@ describe('lib/types/lib', function () {
 			pkg.should.be.an.Object.eql(EXPECTED_PACKAGE);
 
 			fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true;
+
+			fs.existsSync(path.join(NPM_PATH, '.npmignore')).should.be.true;
+			fs.readFileSync(path.join(NPM_PATH, '.npmignore'), {
+				encoding: 'utf-8'
+			}).should.be.a.String.eql(EXPECTED_IGNORE);
+
 			fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true;
 			fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object.eql(EXPECTED_PACKAGE);
 
