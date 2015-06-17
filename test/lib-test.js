@@ -27,7 +27,7 @@ var EXPECTED_PACKAGE = _.defaults({
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['appc-npm', 'appc-lib']
+	keywords: ['appcelerator', 'appc-npm', 'appc-lib', 'alloy', 'titanium', 'arrow']
 }, EXPECTED_ANALYZE);
 
 describe('lib/types/lib', function () {

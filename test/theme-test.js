@@ -6,18 +6,18 @@ var should = require('should');
 var fs = require('fs-extra');
 
 var main = require('../');
-var type = require('../lib/types/sync');
+var type = require('../lib/types/theme');
 
-var FIXTURE_PATH = path.join(__dirname, 'fixtures', 'sync');
+var FIXTURE_PATH = path.join(__dirname, 'fixtures', 'theme');
 var TMP_PATH = path.join(__dirname, '..', 'tmp');
-var NPM_PATH = path.join(TMP_PATH, 'npm', 'alloy-sync-restapi');
+var NPM_PATH = path.join(TMP_PATH, 'npm', 'foo');
 var EXPECTED_ANALYZE = {
-	name: 'alloy-sync-restapi',
+	name: 'alloy-theme-foo',
 	'appc-npm': {
 		target: {
-			alloy: 'app/lib/alloy/sync/'
+			alloy: 'app/themes/foo'
 		},
-		ignore: ['package.json', 'README.md']
+		ignore: ['package.json']
 	}
 };
 var EXPECTED_PACKAGE = _.defaults({
@@ -25,30 +25,30 @@ var EXPECTED_PACKAGE = _.defaults({
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['appcelerator', 'appc-npm', 'alloy-sync', 'alloy']
+	keywords: ['appcelerator', 'appc-npm', 'alloy-theme', 'alloy']
 }, EXPECTED_ANALYZE);
 
-describe('lib/types/sync', function () {
+describe('lib/types/theme', function () {
 
 	before(function () {
 		fs.copySync(FIXTURE_PATH, NPM_PATH);
 		fs.outputFileSync(path.join(TMP_PATH, 'app', 'controllers', 'index.js'));
-		fs.outputFileSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'another.js'));
+		fs.outputFileSync(path.join(TMP_PATH, 'app', 'themes', 'another', 'config.json'));
 		fs.outputJsonSync(path.join(TMP_PATH, 'package.json'), {
 			dependencies: {
-				'alloy-sync-restapi': './npm/alloy-sync-restapi'
+				'alloy-theme-foo': './npm/foo'
 			}
 		});
 	});
 
 	after(function () {
-		// fs.removeSync(TMP_PATH);
+		fs.removeSync(TMP_PATH);
 	});
 
 	it('should analyze', function (done) {
 		should.exist(type.prefix);
 
-		type.prefix.should.be.a.String.eql('alloy-sync');
+		type.prefix.should.be.a.String.eql('alloy-theme');
 
 		return type.analyze(NPM_PATH, function (err, pkg) {
 
@@ -70,7 +70,7 @@ describe('lib/types/sync', function () {
 
 		return main({
 			src: NPM_PATH,
-			type: 'sync'
+			type: 'theme'
 
 		}, function (err, pkg) {
 
@@ -100,11 +100,10 @@ describe('lib/types/sync', function () {
 				return done(new Error(stderr));
 			}
 
-			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'restapi.js')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'another.js')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'README.md')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'package.json')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'alloy', 'sync', 'appc-npm')).should.not.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'another', 'config.json')).should.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'foo', 'config.json')).should.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'foo', 'package.json')).should.not.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'foo', 'appc-npm')).should.not.be.true;
 
 			return done();
 		});

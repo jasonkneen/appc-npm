@@ -1,0 +1,9 @@
+{
+	"id": "com.foo",
+	"version": "1.0.1",
+	"description": "description",
+	"author": "author",
+	"license": "license",
+	"tags": "foo, bar",
+	"foo": "bar"
+}

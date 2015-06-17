@@ -103,7 +103,7 @@ module.exports = function (opts, callback) {
 			pkg.version = info.version || pkg.version || '1.0.0';
 
 			// fallback for name
-			pkg.name = pkg.name || type.prefix + '-' + path.dirname(src);
+			pkg.name = pkg.name || type.prefix + '-' + path.basename(src);
 
 			if (typeof pkg.scripts !== 'object') {
 				pkg.scripts = {};
@@ -115,18 +115,27 @@ module.exports = function (opts, callback) {
 			}
 
 			// ensure keywords
+
+			var keywords = ['appcelerator', 'appc-npm', type.prefix];
+
+			if (typeof pkg['appc-npm'].target === 'string') {
+				keywords.push('arrow', 'alloy', 'titanium');
+			} else {
+				keywords = keywords.concat(_.keys(pkg['appc-npm'].target));
+			}
+
 			if (!_.isArray(pkg.keywords)) {
-				pkg.keywords = ['appc-npm', type.prefix];
+				pkg.keywords = keywords;
 
 			} else {
 
-				if (pkg.keywords.indexOf('appc-npm') === -1) {
-					pkg.keywords.push('appc-npm');
-				}
+				keywords.forEach(function (keyword) {
 
-				if (pkg.keywords.indexOf(type.prefix) === -1) {
-					pkg.keywords.push(type.prefix);
-				}
+					if (pkg.keywords.indexOf(keyword) === -1) {
+						pkg.keywords.push(keyword);
+					}
+
+				});
 			}
 
 			return next();

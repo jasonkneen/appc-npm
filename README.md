@@ -5,7 +5,7 @@ Package components for Appcelerator Titanium, Alloy and Arrow projects for distr
 
 > **NOTE:** Running `appc-npm <type>` for your component only updates/adds a `package.json` and `appc-npm` postinstall executable. It adds **no dependencies** and does not change your code.
 
-## Install ![NPM](https://img.shields.io/npm/v/appc-npm.svg)
+## Install ![NPM](https://img.shields.io/npm/v/appc-npm.svg?style=flat-square)
 
 ```
 $ [sudo] npm install -g appc-npm
@@ -84,6 +84,11 @@ Alloy Widgets. Uses `widget.json` to populate the `package.json`, ignores that s
 Alloy sync adapters. Searches for the first `.js` and uses `alloy-sync-<filename>` as the package name and `1.0.0` for the version. All other files are ignored for the installer.
 
 * [Browse Alloy sync adapters on NPM](https://www.npmjs.com/browse/keyword/alloy-sync)
+
+### `theme`
+Alloy themes. Uses `alloy-sync-<dirname>` as the package name and `1.0.0` for the version. It ignores the generated `package.json` for the installer.
+
+* [Browse Alloy themes adapters on NPM](https://www.npmjs.com/browse/keyword/alloy-theme)
 
 ### `lib`
 Titanium, Alloy or Arrow CommonJS libraries. Searches for the first `.js` and uses `alloy-sync-<filename>` as the package name and `1.0.0` for the version. All other files are ignored for the installer.

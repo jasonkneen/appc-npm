@@ -25,7 +25,7 @@ var EXPECTED_PACKAGE = _.defaults({
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['appc-npm', 'arrow-block']
+	keywords: ['appcelerator', 'appc-npm', 'arrow-block', 'arrow']
 }, EXPECTED_ANALYZE);
 
 describe('lib/types/block', function () {
