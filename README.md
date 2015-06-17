@@ -1,4 +1,4 @@
-# Appcelerator NPM Distribution
+# Appcelerator NPM Distribution ![EXPERIMENTAL](https://img.shields.io/badge/status-experimental-green.svg?style=flat-square)
 Package components for Appcelerator Titanium, Alloy and Arrow projects for distribution and dependency via NPM.
 
 * [Browse Appcelerator Components on NPM](https://www.npmjs.com/browse/keyword/appc-npm)
