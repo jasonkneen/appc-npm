@@ -26,21 +26,8 @@ $ npm publish
 
 ## Use
 
-Create or update the `package.json` for your project:
-
 ```
-{
-	...
-	"dependencies": {
-		"alloy-widget-myWidget": "1.0.0"
-	}
-}
-```
-
-Install the dependencies:
-
-```
-$ npm install
+$ npm install alloy-widget-myWidget --save
 
 > alloy-widget-myWidget@1.0.0 postinstall /Users/fokkezb/myProject/node_modules/alloy-widget-myWidget
 > node ./appc-npm
@@ -58,7 +45,7 @@ After which you'll find the widget in:
 You can add dependencies to other Appcelerator dependencies on NPM to the `package.json` of your packaged component. So if your Alloy widget depends on a library, module or other widget then you can install them all in one go.
 
 ```
-$ npm install
+$ npm install alloy-widget-myWidget --save
 
 > alloy-widget-myWidget@1.0.0 postinstall /Users/fokkezb/myProject/node_modules/alloy-widget-myWidget
 > node ./appc-npm
