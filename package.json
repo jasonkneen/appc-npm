@@ -1,7 +1,7 @@
 {
   "name": "appc-npm",
   "version": "1.3.0",
-  "description": "Use NPM to distrbute Appcelerator Titanium, Alloy and Arrow components",
+  "description": "Package components for Appcelerator Titanium, Alloy and Arrow projects for distribution via NPM.",
   "main": "index.js",
   "bin": {
     "appc-npm": "./bin/appc-npm"

@@ -1,11 +1,11 @@
 # Appcelerator NPM Distribution
-Package components for Appcelerator Titanium, Alloy and Arrow projects for distribution and dependency via NPM.
+Package components for Appcelerator Titanium, Alloy and Arrow projects for distribution via NPM.
 
 * [Browse Appcelerator Components on NPM](https://www.npmjs.com/browse/keyword/appc-npm)
 
 > **NOTE:** Running `appc-npm <type>` for your component only updates/adds a `package.json` and `appc-npm` postinstall executable. It adds **no dependencies** and does not change your code.
 
-## Install
+## Install ![NPM](https://img.shields.io/npm/v/appc-npm.svg)
 
 ```
 $ [sudo] npm install -g appc-npm
@@ -102,3 +102,22 @@ Arrow connectors. Searches for `package.json` to determine the target for the in
 
 ### TODO: `module`
 Titanium modules. Searches for the most recent ZIP file and adds that file to the `files` field of the `package.json` so that only that file and our installer will be published to NPM. It also reads the `manifest` to use in the default package, which is `ti-module-<id>`, and for the version.
+
+## Test
+
+```
+$ npm install
+$ npm test
+```
+
+## Contribute
+
+To add new types of components, provide a PR with a [type](lib/types), [fixture](test/fixtures) and [test](test).
+
+## Issues
+
+Please report issues and features requests in the repo's [issue tracker](https://github.com/fokkezb/appc-npm/issues).
+
+## License
+
+Distributed under [MIT License](LICENSE).
