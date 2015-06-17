@@ -19,7 +19,7 @@ if (typeof appcNPM !== 'object') {
   fail('Could not find \'appc-npm\' in package.json');
 }
 
-var target = findTarget(__dirname);
+var target = findTarget();
 
 if (!target) {
   fail('Could not find project');
@@ -42,21 +42,27 @@ copySync(__dirname, path.join(target.path, targetPath), function (fullPath) {
 
 function findTarget(dir) {
 
-  if (fs.existsSync(path.join(dir, 'appc.json'))) {
-    return {
-      name: 'arrow',
-      path: dir
-    };
-  } else if (fs.existsSync(path.join(dir, 'app', 'controllers', 'index.js'))) {
-    return {
-      name: 'alloy',
-      path: dir
-    };
-  } else if (fs.existsSync(path.join(dir, 'tiapp.xml'))) {
-    return {
-      name: 'titanium',
-      path: dir
-    };
+  if (dir) {
+
+    if (fs.existsSync(path.join(dir, 'appc.json'))) {
+      return {
+        name: 'arrow',
+        path: dir
+      };
+    } else if (fs.existsSync(path.join(dir, 'app', 'controllers', 'index.js'))) {
+      return {
+        name: 'alloy',
+        path: dir
+      };
+    } else if (fs.existsSync(path.join(dir, 'tiapp.xml'))) {
+      return {
+        name: 'titanium',
+        path: dir
+      };
+    }
+
+  } else {
+    dir = __dirname;
   }
 
   dirUp = path.resolve(dir, '..', '..');

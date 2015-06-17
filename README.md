@@ -108,8 +108,10 @@ Arrow post or pre-blocks. Searches for the first `.js` to determine the base pat
 
 * [Browse Arrow blocks on NPM](https://www.npmjs.com/browse/keyword/arrow-block)
 
+### `connector`
+Arrow connectors. Searches for `package.json` to determine the target for the installer and will update the file with the `postinstall` script and `appc-npm` property, leaving the name and version as it is.
+
+* [Browse Arrow connectors on NPM](https://www.npmjs.com/browse/keyword/arrow-connector)
+
 ### TODO: `module`
 Titanium modules. Searches for the most recent ZIP file and adds that file to the `files` field of the `package.json` so that only that file and our installer will be published to NPM. It also reads the `manifest` to use in the default package, which is `ti-module-<id>`, and for the version.
-
-### TODO: `connector`
-Arrow connectors. Searches for `appc.json` to determine the base path and adds that same directory to the list of paths to copy. The existing `package.json` is updated with the `postinstall` script and `appc-npm` property containing the list of paths.
