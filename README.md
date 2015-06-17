@@ -1,4 +1,4 @@
-# Appcelerator NPM Distribution
+# Appcelerator NPM Distribution ![EXPERIMENTAL](https://img.shields.io/badge/status-experimental-green.svg?style=flat-square)
 Package components for Appcelerator Titanium, Alloy and Arrow projects for distribution via NPM.
 
 * [Browse Appcelerator Components on NPM](https://www.npmjs.com/browse/keyword/appc-npm)
@@ -100,7 +100,7 @@ Arrow connectors. Searches for `package.json` to determine the target for the in
 
 * [Browse Arrow connectors on NPM](https://www.npmjs.com/browse/keyword/arrow-connector)
 
-### TODO: `module`
+### `module` ![TODO](https://img.shields.io/badge/TO-DO-green.svg?style=flat-square)
 Titanium modules. Searches for the most recent ZIP file and adds that file to the `files` field of the `package.json` so that only that file and our installer will be published to NPM. It also reads the `manifest` to use in the default package, which is `ti-module-<id>`, and for the version.
 
 ## Test
