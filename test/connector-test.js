@@ -24,7 +24,7 @@ var EXPECTED_PACKAGE = _.defaults({
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['appcelerator', 'appc-npm', 'arrow-connector', 'arrow']
+	keywords: ['appc-npm', 'appcelerator', 'arrow', 'arrow-connector']
 }, EXPECTED_ANALYZE);
 
 describe('lib/types/connector', function () {

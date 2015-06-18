@@ -19,7 +19,7 @@ var EXPECTED_ANALYZE = {
 			titanium: 'Resources/',
 			arrow: 'lib/'
 		},
-		ignore: ['package.json', 'README.md']
+		ignore: ['README.md', 'package.json']
 	}
 };
 var EXPECTED_PACKAGE = _.defaults({
@@ -27,7 +27,7 @@ var EXPECTED_PACKAGE = _.defaults({
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['appcelerator', 'appc-npm', 'appc-lib', 'alloy', 'titanium', 'arrow']
+	keywords: ['alloy', 'appc-lib', 'appc-npm', 'appcelerator', 'arrow', 'titanium']
 }, EXPECTED_ANALYZE);
 var EXPECTED_IGNORE = _.without(EXPECTED_PACKAGE['appc-npm'].ignore, 'package.json').join('\n');
 

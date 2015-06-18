@@ -31,7 +31,7 @@ var EXPECTED_PACKAGE_SINGLE = _.defaults({
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['appcelerator', 'appc-npm', 'ti-module', 'titanium', 'alloy']
+	keywords: ['alloy', 'appc-npm', 'appcelerator', 'ti-module', 'titanium']
 }, EXPECTED_ANALYZE_SINGLE);
 var EXPECTED_ANALYZE_MULTIPLE = {
 	name: 'ti-module-com.foo',
@@ -44,15 +44,15 @@ var EXPECTED_ANALYZE_MULTIPLE = {
 			alloy: '/',
 			titanium: '/',
 		},
-		unzip: ['ios/dist/com.foo-iphone-1.0.1.zip', 'android/dist/com.foo-android-1.0.2.zip']
+		unzip: ['android/dist/com.foo-android-1.0.2.zip', 'ios/dist/com.foo-iphone-1.0.1.zip']
 	},
-	files: ['appc-npm', 'ios/dist/com.foo-iphone-1.0.1.zip', 'android/dist/com.foo-android-1.0.2.zip']
+	files: ['android/dist/com.foo-android-1.0.2.zip', 'appc-npm', 'ios/dist/com.foo-iphone-1.0.1.zip']
 };
 var EXPECTED_PACKAGE_MULTIPLE = _.defaults({
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['appcelerator', 'appc-npm', 'ti-module', 'titanium', 'alloy']
+	keywords: ['alloy', 'appc-npm', 'appcelerator', 'ti-module', 'titanium']
 }, EXPECTED_ANALYZE_MULTIPLE);
 
 describe('lib/types/module', function () {

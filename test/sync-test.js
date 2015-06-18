@@ -17,7 +17,7 @@ var EXPECTED_ANALYZE = {
 		target: {
 			alloy: 'app/lib/alloy/sync/'
 		},
-		ignore: ['package.json', 'README.md']
+		ignore: ['README.md', 'package.json']
 	}
 };
 var EXPECTED_PACKAGE = _.defaults({
@@ -25,7 +25,7 @@ var EXPECTED_PACKAGE = _.defaults({
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['appcelerator', 'appc-npm', 'alloy-sync', 'alloy']
+	keywords: ['alloy', 'alloy-sync', 'appc-npm', 'appcelerator']
 }, EXPECTED_ANALYZE);
 
 describe('lib/types/sync', function () {

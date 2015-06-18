@@ -25,7 +25,7 @@ var EXPECTED_PACKAGE = _.defaults({
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['appcelerator', 'appc-npm', 'alloy-theme', 'alloy']
+	keywords: ['alloy', 'alloy-theme', 'appc-npm', 'appcelerator']
 }, EXPECTED_ANALYZE);
 
 describe('lib/types/theme', function () {

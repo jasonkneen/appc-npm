@@ -3,6 +3,7 @@ var path = require('path');
 var fs = require('fs-extra');
 var async = require('async');
 var _ = require('underscore');
+var semver = require('semver');
 
 module.exports = function (opts, callback) {
 
@@ -96,47 +97,76 @@ module.exports = function (opts, callback) {
 
 		updatePackage: function (next) {
 
-			// remove old installer and zips from whitelist
-			if (pkg.files) {
+			if (newPkg.files) {
 
-				// TODO fix this
-
-				pkg.files = _.filter(pkg.files, function (file) {
+				// remove old installer and zips from whitelist
+				pkg.files = (_.isArray(pkg.files) ? _.filter(pkg.files, function (file) {
 					return (file !== 'appc-npm' && !/\.zip$/.test(file));
-				}).concat(newPkg.files);
+				}) : []).concat(newPkg.files);
+
+				// sort for testing
+				pkg.files.sort();
 			}
 
-			// don't overwrite
+			// update version if it is greater
+			if (newPkg.version && (!pkg.version || semver.lt(pkg.version, newPkg.version))) {
+				pkg.version = newPkg.version;
+			} else if (!pkg.version) {
+				pkg.version = '1.0.0';
+			}
+
+			if (!_.isObject(pkg['appc-npm'])) {
+				pkg['appc-npm'] = {};
+			}
+
+			// overwrite unzip
+			if (newPkg['appc-npm'].unzip) {
+				pkg['appc-npm'].unzip = newPkg['appc-npm'].unzip;
+
+				// sort for testing
+				pkg['appc-npm'].unzip.sort();
+			}
+
+			// overwrite target
+			if (newPkg['appc-npm'].target) {
+				pkg['appc-npm'].target = newPkg['appc-npm'].target;
+			}
+
+			// do not overwrite ignore
+			if (newPkg['appc-npm'].ignore && !pkg['appc-npm'].ignore) {
+				pkg['appc-npm'].ignore = newPkg['appc-npm'].ignore;
+			}
+
+			// sort for testing
+			if (pkg['appc-npm'].ignore) {
+				pkg['appc-npm'].ignore.sort();
+			}
+
+			// don't overwrite other keys
 			_.defaults(pkg, newPkg);
 
-			// do overwrite version, falling back to 1.0.0
-			pkg.version = newPkg.version || pkg.version || '1.0.0';
-
-			// do overwrite unzip
-			if (pkg['appc-npm'].unzip) {
-				pkg['appc-npm'].unzip = newPkg['appc-npm'].unzip;
+			// fallback name
+			if (!pkg.name) {
+				pkg.name = type.prefix + '-' + path.basename(src);
 			}
 
-			// fallback name
-			pkg.name = pkg.name || type.prefix + '-' + path.basename(src);
-
+			// do not overwrite scripts
 			if (typeof pkg.scripts !== 'object') {
 				pkg.scripts = {};
 			}
 
-			// don't overwrite postinstall
+			// do not overwrite postinstall
 			if (!pkg.scripts.postinstall) {
 				pkg.scripts.postinstall = 'node ./appc-npm';
 			}
 
 			// ensure keywords
-
 			var keywords = ['appcelerator', 'appc-npm', type.prefix];
 
-			if (typeof pkg['appc-npm'].target === 'string') {
-				keywords.push('arrow', 'alloy', 'titanium');
-			} else {
+			if (_.isObject(pkg['appc-npm'])) {
 				keywords = keywords.concat(_.keys(pkg['appc-npm'].target));
+			} else {
+				keywords.push('arrow', 'alloy', 'titanium');
 			}
 
 			if (!_.isArray(pkg.keywords)) {
@@ -152,6 +182,9 @@ module.exports = function (opts, callback) {
 
 				});
 			}
+
+			// sort for better testing
+			pkg.keywords.sort();
 
 			return next();
 		},

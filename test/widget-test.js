@@ -29,7 +29,7 @@ var EXPECTED_PACKAGE = _.defaults({
 	scripts: {
 		postinstall: 'node ./appc-npm'
 	},
-	keywords: ['foo', 'bar', 'appcelerator', 'appc-npm', 'alloy-widget', 'alloy']
+	keywords: ['alloy', 'alloy-widget', 'appc-npm', 'appcelerator', 'bar', 'foo']
 }, EXPECTED_ANALYZE);
 
 describe('lib/types/widget', function () {
