@@ -24,6 +24,8 @@ $ npm publish
 + alloy-widget-myWidget@1.0.0
 ```
 
+> **NOTE:** You probably want to check `package.json` before you publish and set or update [fields](https://docs.npmjs.com/files/package.json) like `description`, `homepage`, `bugs`, `license`, `repository`.
+
 ## Use
 
 ```
