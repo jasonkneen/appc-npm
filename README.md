@@ -80,7 +80,7 @@ You can use the following commands or types of components:
 ### `module`
 Titanium modules. Run it in the [folder above the platform folders](https://github.com/viezel/NappDrawer) to package the most recent distribution ZIP file of each platform. Run it in a platform folder to package only that one.
 
-Reads the `manifest` to populate the `package.json`, using `ti-module-<moduleid>` as name and the greatest version found for all platforms as the package version.
+Reads the `manifest` to populate the `package.json`, using `ti-module-<moduleid>` as name. It wil sum the versions of all platforms to be the package version.
 
 > **NOTE:** Only the most recent ZIP file of each platform and the `appc-npm` installer are added to the `package.json`'s `files` property so that only these will be packaged and published to NPM and not the full module source.
 

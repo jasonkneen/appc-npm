@@ -98,6 +98,9 @@ module.exports = function (opts, callback) {
 
 			// remove old installer and zips from whitelist
 			if (pkg.files) {
+
+				// TODO fix this
+
 				pkg.files = _.filter(pkg.files, function (file) {
 					return (file !== 'appc-npm' && !/\.zip$/.test(file));
 				}).concat(newPkg.files);

@@ -35,7 +35,7 @@ var EXPECTED_PACKAGE_SINGLE = _.defaults({
 }, EXPECTED_ANALYZE_SINGLE);
 var EXPECTED_ANALYZE_MULTIPLE = {
 	name: 'ti-module-com.foo',
-	version: '1.0.2',
+	version: '2.0.3',
 	description: 'description',
 	author: 'author',
 	license: 'license',
