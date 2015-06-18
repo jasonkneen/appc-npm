@@ -1,4 +1,5 @@
 module.exports = function (grunt) {
+	var test = grunt.option('test') || '*';
 
 	// Project configuration.
 	grunt.initConfig({
@@ -8,16 +9,16 @@ module.exports = function (grunt) {
 				reporter: 'spec',
 				ignoreLeaks: false
 			},
-			src: ['test/**/*-test.js']
+			src: ['test/' + test + '-test.js']
 		},
 		jshint: {
 			options: {
 				jshintrc: true
 			},
-			src: ['*.js', 'templates/install', 'templates/**/*.js', 'lib/**/*.js', 'bin/appc-npm']
+			src: ['*.js', 'assets/appc-npm', 'bin/appc-npm', 'lib/**/*.js']
 		},
 		kahvesi: {
-			src: ['test/**/*.js']
+			src: ['test/' + test + '-test.js']
 		},
 		clean: ['tmp']
 	});

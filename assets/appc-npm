@@ -2,43 +2,113 @@
 
 var path = require('path');
 var fs = require('fs');
+var child_process = require('child_process');
 
-var pkg;
+var OS_WINDOWS = (process.platform === 'win32');
 
-try {
-  pkg = JSON.parse(fs.readFileSync('package.json', {
-    encoding: 'utf-8'
-  }));
-} catch (e) {
-  fail('Could not read package.json');
+install();
+
+function install() {
+  var pkg;
+
+  try {
+    pkg = JSON.parse(fs.readFileSync('package.json', {
+      encoding: 'utf-8'
+    }));
+  } catch (e) {
+    die('Could not read package.json');
+  }
+
+  var appcNPM = pkg['appc-npm'];
+
+  if (typeof appcNPM !== 'object') {
+    die('Could not find \'appc-npm\' in package.json');
+  }
+
+  var target = findTarget();
+
+  if (!target) {
+    die('Could not find project');
+  }
+
+  var targetPath = (typeof appcNPM.target === 'object') ? appcNPM.target[target.name] : appcNPM.target;
+
+  if (typeof targetPath !== 'string') {
+    die('Could not find \'appc-npm.target.' + target.name + '\' or \'appc-npm.target\' in package.json');
+  }
+
+  targetPath = path.join(target.base, targetPath);
+
+  var zipFiles = toArray(appcNPM.unzip);
+
+  if (zipFiles.length > 0) {
+
+    if (OS_WINDOWS) {
+      mkdirsSync(targetPath);
+    }
+
+    unzip(zipFiles, targetPath);
+
+  } else {
+    var ignore = toArray(appcNPM.ignore);
+    ignore.push('appc-npm');
+
+    try {
+      copySync(__dirname, targetPath, function (fullPath) {
+        var relPath = fullPath.substr(__dirname.length + 1);
+
+        return ignore.indexOf(relPath) === -1;
+      });
+
+    } catch (e) {
+      die('Could not copy \'' + __dirname + '\' to \'' + targetPath + '\'');
+    }
+
+    console.log('Copied \'' + __dirname + '\' to \'' + targetPath + '\'');
+
+    console.log();
+    process.exit(0);
+  }
 }
 
-var appcNPM = pkg['appc-npm'];
+function unzip(files, targetPath) {
+  var file = files.shift();
+  var filePath = path.join(__dirname, file);
+  var command;
 
-if (typeof appcNPM !== 'object') {
-  fail('Could not find \'appc-npm\' in package.json');
+  if (OS_WINDOWS) {
+    command = '/c cd "' + targetPath + '" && jar xf "' + filePath + '"';
+
+  } else {
+    command = 'unzip "' + filePath + '" -d "' + targetPath + '"';
+  }
+
+  return child_process.exec(command, function(error, stdout, stderr) {
+
+    if (error) {
+
+      var err = 'Could not unzip \'' + filePath + '\': ' + stderr;
+
+      if (OS_WINDOWS) {
+        var EOL = require('os').EOL;
+        err += EOL + 'Make sure you have Java JDK installed and added to PATH: ' + EOL + 'http://docs.oracle.com/javase/8/docs/technotes/guides/install/windows_jdk_install.html#BABGDJFH';
+      }
+
+      die(err);
+
+    } else {
+      console.log('Unzipped \'' + filePath + '\' to \'' + targetPath + '\'');
+
+      if (files.length > 0) {
+        unzip(files, targetPath);
+
+      } else {
+        console.log();
+        process.exit(0);
+      }
+    }
+  });
 }
-
-var target = findTarget();
-
-if (!target) {
-  fail('Could not find project');
-}
-
-var targetPath = (typeof appcNPM.target === 'object') ? appcNPM.target[target.name] : appcNPM.target;
-
-if (typeof targetPath !== 'string') {
-  fail('Could not find \'appc-npm.target.' + target.name + '\' or \'appc-npm.target\' in package.json');
-}
-
-var ignore = toArray(appcNPM.ignore);
-ignore.push('appc-npm');
-
-copySync(__dirname, path.join(target.path, targetPath), function (fullPath) {
-  var relPath = fullPath.substr(__dirname.length + 1);
-
-  return ignore.indexOf(relPath) === -1;
-});
 
 function findTarget(dir) {
 
@@ -47,17 +117,17 @@ function findTarget(dir) {
     if (fs.existsSync(path.join(dir, 'appc.json'))) {
       return {
         name: 'arrow',
-        path: dir
+        base: dir
       };
     } else if (fs.existsSync(path.join(dir, 'app', 'controllers', 'index.js'))) {
       return {
         name: 'alloy',
-        path: dir
+        base: dir
       };
     } else if (fs.existsSync(path.join(dir, 'tiapp.xml'))) {
       return {
         name: 'titanium',
-        path: dir
+        base: dir
       };
     }
 
@@ -74,8 +144,9 @@ function findTarget(dir) {
   return findTarget(dirUp);
 }
 
-function fail(err) {
+function die(err) {
   console.error(err);
+  console.error();
   process.exit(1);
 }
 

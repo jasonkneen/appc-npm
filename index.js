@@ -17,7 +17,7 @@ module.exports = function (opts, callback) {
 	var src = opts.src || process.cwd();
 	var type = opts.type;
 
-	var info;
+	var newPkg;
 	var pkg = {};
 
 	var packagePath = path.join(src, 'package.json');
@@ -65,7 +65,7 @@ module.exports = function (opts, callback) {
 					return next(err);
 				}
 
-				info = res;
+				newPkg = res;
 
 				return next();
 			});
@@ -96,13 +96,25 @@ module.exports = function (opts, callback) {
 
 		updatePackage: function (next) {
 
-			// don't overwrite...
-			_.defaults(pkg, info);
+			// remove old installer and zips from whitelist
+			if (pkg.files) {
+				pkg.files = _.filter(pkg.files, function (file) {
+					return (file !== 'appc-npm' && !/\.zip$/.test(file));
+				}).concat(newPkg.files);
+			}
 
-			// only version, falling back to 1.0.0
-			pkg.version = info.version || pkg.version || '1.0.0';
+			// don't overwrite
+			_.defaults(pkg, newPkg);
 
-			// fallback for name
+			// do overwrite version, falling back to 1.0.0
+			pkg.version = newPkg.version || pkg.version || '1.0.0';
+
+			// do overwrite unzip
+			if (pkg['appc-npm'].unzip) {
+				pkg['appc-npm'].unzip = newPkg['appc-npm'].unzip;
+			}
+
+			// fallback name
 			pkg.name = pkg.name || type.prefix + '-' + path.basename(src);
 
 			if (typeof pkg.scripts !== 'object') {

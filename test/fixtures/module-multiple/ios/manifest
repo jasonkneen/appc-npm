@@ -1,0 +1,19 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.1
+apiversion: 2
+description: description
+author: author
+license: license
+copyright: copyright
+
+
+# these should not be edited
+name: foo
+moduleid: com.foo
+guid: 472146f7-20d3-4b7b-ba19-8fbb95e86a96
+platform: iphone
+minsdk: 4.0.0.GA
+architectures: armv7 armv7s arm64 i386 x86_64

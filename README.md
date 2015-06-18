@@ -75,6 +75,20 @@ $ appc-npm widget
 ## Commands/Types
 You can use the following commands or types of components:
 
+### `module`
+Titanium modules. Run it in the [folder above the platform folders](https://github.com/viezel/NappDrawer) to package the most recent distribution ZIP file of each platform. Run it in a platform folder to package only that one.
+
+Reads the `manifest` to populate the `package.json`, using `ti-module-<moduleid>` as name and the greatest version found for all platforms as the package version.
+
+> **NOTE:** Only the most recent ZIP file of each platform and the `appc-npm` installer are added to the `package.json`'s `files` property so that only these will be packaged and published to NPM and not the full module source.
+
+* [Browse Titanium modules on NPM](https://www.npmjs.com/browse/keyword/ti-module)
+
+### `lib`
+Titanium, Alloy or Arrow CommonJS libraries. Searches for the first `.js` and uses `alloy-sync-<filename>` as the package name and `1.0.0` for the version. All other files are ignored for the installer.
+
+* [Browse Appcelerator libraries on NPM](https://www.npmjs.com/browse/keyword/appc-lib)
+
 ### `widget`
 Alloy Widgets. Uses `widget.json` to populate the `package.json`, ignores that same file for the installer and uses `alloy-widget-<id>` as the package name.
 
@@ -90,33 +104,33 @@ Alloy themes. Uses `alloy-sync-<dirname>` as the package name and `1.0.0` for th
 
 * [Browse Alloy themes adapters on NPM](https://www.npmjs.com/browse/keyword/alloy-theme)
 
-### `lib`
-Titanium, Alloy or Arrow CommonJS libraries. Searches for the first `.js` and uses `alloy-sync-<filename>` as the package name and `1.0.0` for the version. All other files are ignored for the installer.
+### `connector`
+Arrow connectors. Searches for `package.json` to determine the target for the installer and will update the file with the `postinstall` script and `appc-npm` property, leaving the name and version as it is.
 
-* [Browse Appcelerator libraries on NPM](https://www.npmjs.com/browse/keyword/appc-lib)
+* [Browse Arrow connectors on NPM](https://www.npmjs.com/browse/keyword/arrow-connector)
 
 ### `block`
 Arrow post or pre-blocks. Searches for the first `.js` to determine the base path and adds that file to the list of paths to copy to the project. The default package name is `arrow-block-<filename>` and version is `1.0.0`.
 
 * [Browse Arrow blocks on NPM](https://www.npmjs.com/browse/keyword/arrow-block)
 
-### `connector`
-Arrow connectors. Searches for `package.json` to determine the target for the installer and will update the file with the `postinstall` script and `appc-npm` property, leaving the name and version as it is.
-
-* [Browse Arrow connectors on NPM](https://www.npmjs.com/browse/keyword/arrow-connector)
-
-### `module` ![TODO](https://img.shields.io/badge/TO-DO-green.svg?style=flat-square)
-Titanium modules. Searches for the most recent ZIP file and adds that file to the `files` field of the `package.json` so that only that file and our installer will be published to NPM. It also reads the `manifest` to use in the default package, which is `ti-module-<id>`, and for the version.
-
 ## Module API
 
 You can also require `appc-npm` as a module, which is exactly [what the CLI does](bin/appc-npm).
 
 ## Test
+To lint and run all tests:
 
 ```
+$ [sudo] npm install -g grunt
 $ npm install
 $ npm test
+```
+
+To run a specific test by name (without `-test.js`):
+
+```
+$ grunt test --test <test>
 ```
 
 ## Contribute
