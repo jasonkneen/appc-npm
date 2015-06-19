@@ -4,7 +4,6 @@ node_js:
   - "0.12"
 before_script:
   - npm install -g npm@latest
-  - npm install -g .
   - npm install -g grunt-cli
 os:
   - linux
