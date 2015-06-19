@@ -1,5 +1,5 @@
 # Appcelerator Packager for NPM
-Packag [many types of components](#commands--types) for Appcelerator Titanium, Alloy and Arrow projects for distribution via NPM.
+Package [many types of components](#commands--types) for Appcelerator Titanium, Alloy and Arrow projects for distribution via NPM, including [modules](#module) and [support for nested dependencies](#support-for-nested-dependencies).
 
 * [Browse Appcelerator Components on NPM](https://www.npmjs.com/browse/keyword/appc-npm)
 
