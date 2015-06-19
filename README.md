@@ -15,7 +15,7 @@ $ [sudo] npm install -g appc-npm
 Simply navigate to your Titanium module or library, Alloy widget, sync adapter, Arrow connector or other component and run `appc-npm <type> [src]` with the [component type](#types-of-components) and optional path (defaulting to CWD).
 
 ```
-$ cd mywidget
+$ cd myWidget
 
 $ appc-npm widget
 + alloy-widget-myWidget@1.0.0
@@ -137,6 +137,12 @@ To run a specific test by name (without `-test.js`):
 
 ```
 $ grunt test --test <test>
+```
+
+To get a coverage report:
+
+```
+$ grunt cover
 ```
 
 ## Contribute
