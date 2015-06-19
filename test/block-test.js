@@ -21,6 +21,7 @@ var EXPECTED_ANALYZE = {
 	}
 };
 var EXPECTED_PACKAGE = _.defaults({
+	name: 'arrow-block-geocode',
 	version: '1.0.0',
 	scripts: {
 		postinstall: 'node ./appc-npm'

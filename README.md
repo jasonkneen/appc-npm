@@ -82,7 +82,7 @@ You can use the following commands or types of components:
 ### `module`
 Titanium modules. Run it in the [folder above the platform folders](https://github.com/viezel/NappDrawer) to package the most recent distribution ZIP file of each platform. Run it in a platform folder to package only that one.
 
-Reads the `manifest` to populate the `package.json`, using `ti-module-<moduleid>` as name. It wil sum the versions of all platforms to be the package version.
+Reads the `manifest` to populate the `package.json`. It will check if the `moduleid` is available on NPM and fall back to `ti-module-<moduleid>` as name. It wil sum the versions of all platforms to be the package version.
 
 Only the most recent ZIP file of each platform and the `appc-npm` installer are added to the `package.json`'s `files` property so that only these will be packaged and published to NPM and not the full module source.
 
@@ -94,7 +94,7 @@ Titanium, Alloy or Arrow CommonJS libraries. Searches for the first `.js` and us
 * [Browse Appcelerator libraries on NPM](https://www.npmjs.com/browse/keyword/appc-lib)
 
 ### `widget`
-Alloy Widgets. Uses `widget.json` to populate the `package.json`, ignores that same file for the installer and uses `alloy-widget-<id>` as the package name.
+Alloy Widgets. Uses `widget.json` to populate the `package.json` and ignores that same file for the installer. It will check if the widget `id` is available on NPM and fall back to `alloy-widget-<id>` as the package name.
 
 * [Browse Alloy widgets on NPM](https://www.npmjs.com/browse/keyword/alloy-widget)
 

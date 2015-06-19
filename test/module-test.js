@@ -13,7 +13,7 @@ var FIXTURE_PATH_MULTIPLE = path.join(__dirname, 'fixtures', 'module-multiple');
 var TMP_PATH = path.join(__dirname, '..', 'tmp');
 var NPM_PATH = path.join(TMP_PATH, 'npm', 'ti-module-com.foo');
 var EXPECTED_ANALYZE_SINGLE = {
-	name: 'ti-module-com.foo',
+	name: 'com.foo',
 	version: '1.0.1',
 	description: 'description',
 	author: 'author',
@@ -34,7 +34,7 @@ var EXPECTED_PACKAGE_SINGLE = _.defaults({
 	keywords: ['alloy', 'appc-npm', 'appcelerator', 'ti-module', 'titanium']
 }, EXPECTED_ANALYZE_SINGLE);
 var EXPECTED_ANALYZE_MULTIPLE = {
-	name: 'ti-module-com.foo',
+	name: 'com.foo',
 	version: '2.0.3',
 	description: 'description',
 	author: 'author',

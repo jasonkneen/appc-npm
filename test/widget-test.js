@@ -12,12 +12,12 @@ var FIXTURE_PATH = path.join(__dirname, 'fixtures', 'widget');
 var TMP_PATH = path.join(__dirname, '..', 'tmp');
 var NPM_PATH = path.join(TMP_PATH, 'npm', 'alloy-widget-com.foo');
 var EXPECTED_ANALYZE = {
-	name: 'alloy-widget-com.foo',
+	name: 'com.foo',
 	version: '1.0.1',
 	description: 'description',
 	author: 'author',
 	license: 'license',
-	keywords: ['foo', 'bar'],
+	keywords: ['bar', 'foo'],
 	'appc-npm': {
 		target: {
 			alloy: 'app/widgets/com.foo'
