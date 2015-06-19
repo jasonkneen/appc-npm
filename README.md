@@ -1,17 +1,17 @@
-# Appcelerator NPM Distribution ![EXPERIMENTAL](https://img.shields.io/badge/status-experimental-green.svg?style=flat-square)
-Package components for Appcelerator Titanium, Alloy and Arrow projects for distribution via NPM.
+# Appcelerator Packager for NPM
+Packag [many types of components](#commands--types) for Appcelerator Titanium, Alloy and Arrow projects for distribution via NPM.
 
 * [Browse Appcelerator Components on NPM](https://www.npmjs.com/browse/keyword/appc-npm)
 
-> **NOTE:** Running `appc-npm <type>` for your component only updates/adds a `package.json` and `appc-npm` postinstall executable. It adds **no dependencies** and does not change your code.
+> **NOTE:** The packager only updates/adds a `package.json` and `appc-npm` postinstall executable. It adds **no dependencies** and does not change your code.
 
-## Install ![NPM](https://img.shields.io/npm/v/appc-npm.svg?style=flat-square)
+## Install the packager ![NPM](https://img.shields.io/npm/v/appc-npm.svg?style=flat-square)
 
 ```
 $ [sudo] npm install -g appc-npm
 ```
 
-## Package & Publish
+## Package & Publish to NPM
 Simply navigate to your Titanium module or library, Alloy widget, sync adapter, Arrow connector or other component and run the CLI with the command for that component and optional path (defaulting to CWD).
 
 ```
@@ -24,9 +24,9 @@ $ npm publish
 + alloy-widget-myWidget@1.0.0
 ```
 
-> **NOTE:** You probably want to check `package.json` before you publish, see if a shorter name is available and set [fields](https://docs.npmjs.com/files/package.json) like `description`, `homepage`, `bugs`, `license` and `repository`.
+You probably want to check `package.json` before you publish and set [fields](https://docs.npmjs.com/files/package.json) like `description`, `homepage`, `bugs`, `license` and `repository`.
 
-## Use
+## Install a package from NPM
 
 ```
 $ npm install alloy-widget-myWidget --save
@@ -43,9 +43,9 @@ After which you'll find the widget in:
 ./app/widgets/myWidget
 ```
 
-> **NOTE:** Until [#7](https://github.com/FokkeZB/appc-npm/issues/7) is resolved you do need to manually add a module or widget to the `tiapp.xml` or `config.json` of your project.
+For modules and widgets the bundled installer will also update the `tiapp.xml` and `app/config.json` to add the dependency.
 
-## Nested dependencies
+## Support for nested dependencies
 You can add dependencies to other Appcelerator dependencies on NPM to the `package.json` of your packaged component. So if your Alloy widget depends on a library, module or other widget then you can install them all in one go.
 
 ```
@@ -68,7 +68,7 @@ After which you'll find the widget and the lib it depends on in:
 ./app/lib/xp.ui.js
 ```
 
-## Update
+## Update a package
 Run the command again to update the packaged installer and update the `package.json`'s version (for modules and widgets) and list of files to ignore or unzip by the installer. It will not overwrite any other changes you made to the `package.json`.
 
 ```
@@ -76,7 +76,7 @@ $ appc-npm widget
 + alloy-widget-myWidget@1.0.1
 ```
 
-## Commands/Types
+## Commands / Types
 You can use the following commands or types of components:
 
 ### `module`
@@ -122,11 +122,12 @@ Arrow post or pre-blocks. Searches for the first `.js` to determine the base pat
 
 You can also require `appc-npm` as a module, which is exactly [what the CLI does](bin/appc-npm).
 
-## Test
-To lint and run all tests:
+## Test [![TRAVIS](https://img.shields.io/travis/FokkeZB/appc-npm.svg?style=flat-square)](https://travis-ci.org/FokkeZB/appc-npm)
+To lint and run all tests you need Grunt and a recent version of NPM:
 
 ```
 $ [sudo] npm install -g grunt
+$ [sudo] npm install -g npm
 $ npm install
 $ npm test
 ```
