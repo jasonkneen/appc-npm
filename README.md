@@ -24,7 +24,7 @@ $ npm publish
 + alloy-widget-myWidget@1.0.0
 ```
 
-> **NOTE:** You probably want to check `package.json` before you publish and set or update [fields](https://docs.npmjs.com/files/package.json) like `description`, `homepage`, `bugs`, `license`, `repository`.
+> **NOTE:** You probably want to check `package.json` before you publish, see if a shorter name is available and set [fields](https://docs.npmjs.com/files/package.json) like `description`, `homepage`, `bugs`, `license` and `repository`.
 
 ## Use
 
@@ -42,6 +42,8 @@ After which you'll find the widget in:
 ```
 ./app/widgets/myWidget
 ```
+
+> **NOTE:** Until [#7](https://github.com/FokkeZB/appc-npm/issues/7) is resolved you do need to manually add a module or widget to the `tiapp.xml` or `config.json` of your project.
 
 ## Nested dependencies
 You can add dependencies to other Appcelerator dependencies on NPM to the `package.json` of your packaged component. So if your Alloy widget depends on a library, module or other widget then you can install them all in one go.
@@ -67,7 +69,7 @@ After which you'll find the widget and the lib it depends on in:
 ```
 
 ## Update
-Run the command again to update the packaged installer, update the version (for components like Alloy widgets) and add missing files to copy.
+Run the command again to update the packaged installer and update the `package.json`'s version (for modules and widgets) and list of files to ignore or unzip by the installer. It will not overwrite any other changes you made to the `package.json`.
 
 ```
 $ appc-npm widget
@@ -82,7 +84,7 @@ Titanium modules. Run it in the [folder above the platform folders](https://gith
 
 Reads the `manifest` to populate the `package.json`, using `ti-module-<moduleid>` as name. It wil sum the versions of all platforms to be the package version.
 
-> **NOTE:** Only the most recent ZIP file of each platform and the `appc-npm` installer are added to the `package.json`'s `files` property so that only these will be packaged and published to NPM and not the full module source.
+Only the most recent ZIP file of each platform and the `appc-npm` installer are added to the `package.json`'s `files` property so that only these will be packaged and published to NPM and not the full module source.
 
 * [Browse Titanium modules on NPM](https://www.npmjs.com/browse/keyword/ti-module)
 
