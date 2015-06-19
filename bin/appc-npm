@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+var _ = require('underscore');
+
 var main = require('../');
 
 var argv = process.argv.slice(2);
@@ -20,13 +22,33 @@ main({
 }, function (err, pkg) {
 
 	if (err) {
-		console.log(err.stack);
+		console.log(err);
 		console.log();
 		return process.exit(1);
 	}
 
 	console.log('+ ' + pkg.name + '@' + pkg.version);
 	console.log();
+
+	var missing = _.omit({
+		'repository': {
+			'type': 'git',
+			'url': 'git+https://github.com/USER/REPO.git'
+		},
+		'bugs': {
+			'url': 'https://github.com/USER/REPO/issues'
+		},
+		'homepage': 'https://github.com/USER/REPO#readme',
+		'author': 'NAME <EMAIL>',
+		'license': 'LICENSE',
+		'description': 'DESCRIPTION'
+	}, _.keys(pkg));
+
+	if (_.size(missing) > 0) {
+		console.log('You might want to check if a shorter name\nis available on NPM and add these fields:');
+		console.log();
+		console.log(JSON.stringify(missing, null, 2).replace(/^(\{\n|\})/mg, ''));
+	}
 
 	process.exit(0);
 });

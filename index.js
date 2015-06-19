@@ -150,6 +150,9 @@ module.exports = function (opts, callback) {
 				pkg.name = type.prefix + '-' + path.basename(src);
 			}
 
+			// name must be in lower case
+			pkg.name = pkg.name.toLowerCase();
+
 			// do not overwrite scripts
 			if (typeof pkg.scripts !== 'object') {
 				pkg.scripts = {};
