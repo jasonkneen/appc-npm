@@ -5,7 +5,7 @@ Package [many types of components](#commands--types) for Appcelerator Titanium, 
 
 > **NOTE:** The packager only updates/adds a `package.json` and `appc-npm` postinstall executable. It adds **no dependencies** and does not change your code.
 
-## Install the packager ![NPM](https://img.shields.io/npm/v/appc-npm.svg?style=flat-square)
+## Install the packager [![NPM](https://img.shields.io/npm/v/appc-npm.svg?style=flat-square)](https://npmjs.com/appc-npm)
 
 ```
 $ [sudo] npm install -g appc-npm
