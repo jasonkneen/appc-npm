@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
 var _ = require('underscore');
+var updateNotifier = require('update-notifier');
 
 var main = require('../');
+
+var pkg = require('../package.json');
+updateNotifier({pkg: pkg}).notify();
 
 var argv = process.argv.slice(2);
 
