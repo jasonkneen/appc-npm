@@ -22,7 +22,10 @@ var EXPECTED_ANALYZE = {
 		target: {
 			alloy: 'app/widgets/com.foo'
 		},
-		ignore: ['package.json']
+		ignore: ['package.json'],
+		config: {
+			'com.foo': '1.0.1'
+		}
 	}
 };
 var EXPECTED_PACKAGE = _.defaults({
@@ -31,6 +34,11 @@ var EXPECTED_PACKAGE = _.defaults({
 	},
 	keywords: ['alloy', 'alloy-widget', 'appc-npm', 'appcelerator', 'bar', 'foo']
 }, EXPECTED_ANALYZE);
+var EXPECTED_CONFIG = {
+	dependencies: {
+		'com.foo': '1.0.1'
+	}
+};
 
 describe('lib/types/widget', function () {
 
@@ -103,6 +111,7 @@ describe('lib/types/widget', function () {
 				return done(new Error(stderr));
 			}
 
+			fs.readJsonSync(path.join(TMP_PATH, 'app', 'config.json')).should.be.an.Object.eql(EXPECTED_CONFIG);
 			fs.existsSync(path.join(TMP_PATH, 'app', 'widgets', 'com.foo', 'widget.json')).should.be.true;
 			fs.existsSync(path.join(TMP_PATH, 'app', 'widgets', 'com.foo', 'package.json')).should.not.be.true;
 			fs.existsSync(path.join(TMP_PATH, 'app', 'widgets', 'com.foo', 'appc-npm')).should.not.be.true;

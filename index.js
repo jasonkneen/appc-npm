@@ -127,6 +127,19 @@ module.exports = function (opts, callback) {
 				pkg['appc-npm'].unzip.sort();
 			}
 
+			// overwrite tiapp
+			if (newPkg['appc-npm'].tiapp) {
+				pkg['appc-npm'].tiapp = newPkg['appc-npm'].tiapp;
+
+				// sort for testing
+				pkg['appc-npm'].tiapp.sort();
+			}
+
+			// overwrite config
+			if (newPkg['appc-npm'].config) {
+				pkg['appc-npm'].config = newPkg['appc-npm'].config;
+			}
+
 			// overwrite target
 			if (newPkg['appc-npm'].target) {
 				pkg['appc-npm'].target = newPkg['appc-npm'].target;
