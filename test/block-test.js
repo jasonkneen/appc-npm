@@ -50,7 +50,7 @@ describe('lib/types/block', function () {
 	it('should analyze', function (done) {
 		should.exist(type.prefix);
 
-		type.prefix.should.be.a.String.eql('arrow-block');
+		type.prefix.should.be.a.String().eql('arrow-block');
 
 		return type.analyze(NPM_PATH, function (err, pkg) {
 
@@ -60,7 +60,7 @@ describe('lib/types/block', function () {
 
 			should.exist(pkg);
 
-			pkg.should.be.an.Object.eql(EXPECTED_ANALYZE);
+			pkg.should.be.an.Object().eql(EXPECTED_ANALYZE);
 
 			return done();
 
@@ -82,17 +82,17 @@ describe('lib/types/block', function () {
 
 			should.exist(pkg);
 
-			pkg.should.be.an.Object.eql(EXPECTED_PACKAGE);
+			pkg.should.be.an.Object().eql(EXPECTED_PACKAGE);
 
-			fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true;
+			fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true();
 
-			fs.existsSync(path.join(NPM_PATH, '.npmignore')).should.be.true;
+			fs.existsSync(path.join(NPM_PATH, '.npmignore')).should.be.true();
 			fs.readFileSync(path.join(NPM_PATH, '.npmignore'), {
 				encoding: 'utf-8'
-			}).should.be.a.String.eql(EXPECTED_IGNORE);
+			}).should.be.a.String().eql(EXPECTED_IGNORE);
 			
-			fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true;
-			fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object.eql(EXPECTED_PACKAGE);
+			fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true();
+			fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object().eql(EXPECTED_PACKAGE);
 
 			return done();
 		});
@@ -108,11 +108,11 @@ describe('lib/types/block', function () {
 				return done(new Error(stderr));
 			}
 
-			fs.existsSync(path.join(TMP_PATH, 'blocks', 'geocode.js')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'blocks', 'another.js')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'blocks', 'README.md')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'blocks', 'package.json')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'blocks', 'appc-npm')).should.not.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'blocks', 'geocode.js')).should.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'blocks', 'another.js')).should.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'blocks', 'README.md')).should.not.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'blocks', 'package.json')).should.not.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'blocks', 'appc-npm')).should.not.be.true();
 
 			return done();
 		});

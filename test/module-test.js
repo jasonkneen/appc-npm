@@ -97,7 +97,7 @@ describe('lib/types/module', function () {
 		it('should analyze', function (done) {
 			should.exist(type.prefix);
 
-			type.prefix.should.be.a.String.eql('ti-module');
+			type.prefix.should.be.a.String().eql('ti-module');
 
 			return type.analyze(NPM_PATH, function (err, pkg) {
 
@@ -107,7 +107,7 @@ describe('lib/types/module', function () {
 
 				should.exist(pkg);
 
-				pkg.should.be.an.Object.eql(EXPECTED_ANALYZE_SINGLE);
+				pkg.should.be.an.Object().eql(EXPECTED_ANALYZE_SINGLE);
 
 				return done();
 
@@ -129,11 +129,11 @@ describe('lib/types/module', function () {
 
 				should.exist(pkg);
 
-				pkg.should.be.an.Object.eql(EXPECTED_PACKAGE_SINGLE);
+				pkg.should.be.an.Object().eql(EXPECTED_PACKAGE_SINGLE);
 
-				fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true;
-				fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true;
-				fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object.eql(EXPECTED_PACKAGE_SINGLE);
+				fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true();
+				fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true();
+				fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object().eql(EXPECTED_PACKAGE_SINGLE);
 
 				return done();
 			});
@@ -151,9 +151,9 @@ describe('lib/types/module', function () {
 
 				fs.readFileSync(path.join(TMP_PATH, 'tiapp.xml'), {
 					encoding: 'utf-8'
-				}).should.be.a.String.eql(TIAPP_AFTER_SINGLE);
-				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'com.foo', '1.0.1', 'manifest')).should.be.true;
-				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'another', '1.0.0', 'manifest')).should.be.true;
+				}).should.be.a.String().eql(TIAPP_AFTER_SINGLE);
+				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'com.foo', '1.0.1', 'manifest')).should.be.true();
+				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'another', '1.0.0', 'manifest')).should.be.true();
 
 				return done();
 			});
@@ -173,9 +173,9 @@ describe('lib/types/module', function () {
 
 				fs.readFileSync(path.join(TMP_PATH, 'tiapp.xml'), {
 					encoding: 'utf-8'
-				}).should.be.a.String.eql(TIAPP_AFTER_CM);
-				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'com.foo', '1.0.1', 'manifest')).should.be.true;
-				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'another', '1.0.0', 'manifest')).should.be.true;
+				}).should.be.a.String().eql(TIAPP_AFTER_CM);
+				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'com.foo', '1.0.1', 'manifest')).should.be.true();
+				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'another', '1.0.0', 'manifest')).should.be.true();
 
 				return done();
 			});
@@ -195,9 +195,9 @@ describe('lib/types/module', function () {
 
 				fs.readFileSync(path.join(TMP_PATH, 'tiapp.xml'), {
 					encoding: 'utf-8'
-				}).should.be.a.String.eql(TIAPP_AFTER_CM);
-				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'com.foo', '1.0.1', 'manifest')).should.be.true;
-				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'another', '1.0.0', 'manifest')).should.be.true;
+				}).should.be.a.String().eql(TIAPP_AFTER_CM);
+				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'com.foo', '1.0.1', 'manifest')).should.be.true();
+				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'another', '1.0.0', 'manifest')).should.be.true();
 
 				return done();
 			});
@@ -226,7 +226,7 @@ describe('lib/types/module', function () {
 		it('should analyze', function (done) {
 			should.exist(type.prefix);
 
-			type.prefix.should.be.a.String.eql('ti-module');
+			type.prefix.should.be.a.String().eql('ti-module');
 
 			return type.analyze(NPM_PATH, function (err, pkg) {
 
@@ -236,7 +236,7 @@ describe('lib/types/module', function () {
 
 				should.exist(pkg);
 
-				pkg.should.be.an.Object.eql(EXPECTED_ANALYZE_MULTIPLE);
+				pkg.should.be.an.Object().eql(EXPECTED_ANALYZE_MULTIPLE);
 
 				return done();
 
@@ -258,11 +258,11 @@ describe('lib/types/module', function () {
 
 				should.exist(pkg);
 
-				pkg.should.be.an.Object.eql(EXPECTED_PACKAGE_MULTIPLE);
+				pkg.should.be.an.Object().eql(EXPECTED_PACKAGE_MULTIPLE);
 
-				fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true;
-				fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true;
-				fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object.eql(EXPECTED_PACKAGE_MULTIPLE);
+				fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true();
+				fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true();
+				fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object().eql(EXPECTED_PACKAGE_MULTIPLE);
 
 				return done();
 			});
@@ -280,10 +280,10 @@ describe('lib/types/module', function () {
 
 				fs.readFileSync(path.join(TMP_PATH, 'tiapp.xml'), {
 					encoding: 'utf-8'
-				}).should.be.a.String.eql(TIAPP_AFTER_MULTIPLE);
-				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'com.foo', '1.0.1', 'manifest')).should.be.true;
-				fs.existsSync(path.join(TMP_PATH, 'modules', 'android', 'com.foo', '1.0.2', 'manifest')).should.be.true;
-				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'another', '1.0.0', 'manifest')).should.be.true;
+				}).should.be.a.String().eql(TIAPP_AFTER_MULTIPLE);
+				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'com.foo', '1.0.1', 'manifest')).should.be.true();
+				fs.existsSync(path.join(TMP_PATH, 'modules', 'android', 'com.foo', '1.0.2', 'manifest')).should.be.true();
+				fs.existsSync(path.join(TMP_PATH, 'modules', 'iphone', 'another', '1.0.0', 'manifest')).should.be.true();
 
 				return done();
 			});

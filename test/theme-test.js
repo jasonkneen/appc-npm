@@ -48,7 +48,7 @@ describe('lib/types/theme', function () {
 	it('should analyze', function (done) {
 		should.exist(type.prefix);
 
-		type.prefix.should.be.a.String.eql('alloy-theme');
+		type.prefix.should.be.a.String().eql('alloy-theme');
 
 		return type.analyze(NPM_PATH, function (err, pkg) {
 
@@ -58,7 +58,7 @@ describe('lib/types/theme', function () {
 
 			should.exist(pkg);
 
-			pkg.should.be.an.Object.eql(EXPECTED_ANALYZE);
+			pkg.should.be.an.Object().eql(EXPECTED_ANALYZE);
 
 			return done();
 
@@ -80,11 +80,11 @@ describe('lib/types/theme', function () {
 
 			should.exist(pkg);
 
-			pkg.should.be.an.Object.eql(EXPECTED_PACKAGE);
+			pkg.should.be.an.Object().eql(EXPECTED_PACKAGE);
 
-			fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true;
-			fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true;
-			fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object.eql(EXPECTED_PACKAGE);
+			fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true();
+			fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true();
+			fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object().eql(EXPECTED_PACKAGE);
 
 			return done();
 		});
@@ -100,10 +100,10 @@ describe('lib/types/theme', function () {
 				return done(new Error(stderr));
 			}
 
-			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'another', 'config.json')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'foo', 'config.json')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'foo', 'package.json')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'foo', 'appc-npm')).should.not.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'another', 'config.json')).should.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'foo', 'config.json')).should.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'foo', 'package.json')).should.not.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'app', 'themes', 'foo', 'appc-npm')).should.not.be.true();
 
 			return done();
 		});

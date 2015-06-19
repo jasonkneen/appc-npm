@@ -122,7 +122,8 @@ Arrow post or pre-blocks. Searches for the first `.js` to determine the base pat
 
 You can also require `appc-npm` as a module, which is exactly [what the CLI does](bin/appc-npm).
 
-## Test [![TRAVIS](https://img.shields.io/travis/FokkeZB/appc-npm.svg?style=flat-square)](https://travis-ci.org/FokkeZB/appc-npm)
+## Test [![Travis](https://img.shields.io/travis/FokkeZB/appc-npm.svg)](https://travis-ci.org/FokkeZB/appc-npm) [![Dependency Status](https://david-dm.org/FokkeZB/appc-npm.svg)](https://david-dm.org/FokkeZB/appc-npm) [![devDependency Status](https://david-dm.org/FokkeZB/appc-npm/dev-status.svg)](https://david-dm.org/FokkeZB/appc-npm#info=devDependencies)
+
 To lint and run all tests you need Grunt and a recent version of NPM:
 
 ```

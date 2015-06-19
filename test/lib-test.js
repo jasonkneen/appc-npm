@@ -51,7 +51,7 @@ describe('lib/types/lib', function () {
 	it('should analyze', function (done) {
 		should.exist(type.prefix);
 
-		type.prefix.should.be.a.String.eql('appc-lib');
+		type.prefix.should.be.a.String().eql('appc-lib');
 
 		return type.analyze(NPM_PATH, function (err, pkg) {
 
@@ -61,7 +61,7 @@ describe('lib/types/lib', function () {
 
 			should.exist(pkg);
 
-			pkg.should.be.an.Object.eql(EXPECTED_ANALYZE);
+			pkg.should.be.an.Object().eql(EXPECTED_ANALYZE);
 
 			return done();
 
@@ -83,17 +83,17 @@ describe('lib/types/lib', function () {
 
 			should.exist(pkg);
 
-			pkg.should.be.an.Object.eql(EXPECTED_PACKAGE);
+			pkg.should.be.an.Object().eql(EXPECTED_PACKAGE);
 
-			fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true;
+			fs.existsSync(path.join(NPM_PATH, 'appc-npm')).should.be.true();
 
-			fs.existsSync(path.join(NPM_PATH, '.npmignore')).should.be.true;
+			fs.existsSync(path.join(NPM_PATH, '.npmignore')).should.be.true();
 			fs.readFileSync(path.join(NPM_PATH, '.npmignore'), {
 				encoding: 'utf-8'
-			}).should.be.a.String.eql(EXPECTED_IGNORE);
+			}).should.be.a.String().eql(EXPECTED_IGNORE);
 
-			fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true;
-			fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object.eql(EXPECTED_PACKAGE);
+			fs.existsSync(path.join(NPM_PATH, 'package.json')).should.be.true();
+			fs.readJsonSync(path.join(NPM_PATH, 'package.json')).should.be.an.Object().eql(EXPECTED_PACKAGE);
 
 			return done();
 		});
@@ -109,11 +109,11 @@ describe('lib/types/lib', function () {
 				return done(new Error(stderr));
 			}
 
-			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'helper.js')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'another.js')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'README.md')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'package.json')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'appc-npm')).should.not.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'helper.js')).should.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'another.js')).should.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'README.md')).should.not.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'package.json')).should.not.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'app', 'lib', 'appc-npm')).should.not.be.true();
 
 			return done();
 		});
@@ -137,11 +137,11 @@ describe('lib/types/lib', function () {
 				return done(new Error(stderr));
 			}
 
-			fs.existsSync(path.join(TMP_PATH, 'Resources', 'helper.js')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'Resources', 'app.js')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'Resources', 'README.md')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'Resources', 'package.json')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'Resources', 'appc-npm')).should.not.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'Resources', 'helper.js')).should.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'Resources', 'app.js')).should.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'Resources', 'README.md')).should.not.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'Resources', 'package.json')).should.not.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'Resources', 'appc-npm')).should.not.be.true();
 
 			return done();
 		});
@@ -166,11 +166,11 @@ describe('lib/types/lib', function () {
 				return done(new Error(stderr));
 			}
 
-			fs.existsSync(path.join(TMP_PATH, 'lib', 'helper.js')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'lib', 'auth.js')).should.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'lib', 'README.md')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'lib', 'package.json')).should.not.be.true;
-			fs.existsSync(path.join(TMP_PATH, 'lib', 'appc-npm')).should.not.be.true;
+			fs.existsSync(path.join(TMP_PATH, 'lib', 'helper.js')).should.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'lib', 'auth.js')).should.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'lib', 'README.md')).should.not.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'lib', 'package.json')).should.not.be.true();
+			fs.existsSync(path.join(TMP_PATH, 'lib', 'appc-npm')).should.not.be.true();
 
 			return done();
 		});
