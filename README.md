@@ -1,5 +1,5 @@
 # Appcelerator Packager for NPM
-Package [many types of components](#commands--types) for Appcelerator Titanium, Alloy and Arrow projects for distribution via NPM, including [modules](#module) and [support for nested dependencies](#support-for-nested-dependencies).
+Package many [types of components](#types-of-components) for Appcelerator Titanium, Alloy and Arrow projects for distribution via NPM, including [modules](#module) and [support for nested dependencies](#support-for-nested-dependencies).
 
 * [Browse Appcelerator Components on NPM](https://www.npmjs.com/browse/keyword/appc-npm)
 
@@ -12,7 +12,7 @@ $ [sudo] npm install -g appc-npm
 ```
 
 ## Package & Publish to NPM
-Simply navigate to your Titanium module or library, Alloy widget, sync adapter, Arrow connector or other component and run the CLI with the command for that component and optional path (defaulting to CWD).
+Simply navigate to your Titanium module or library, Alloy widget, sync adapter, Arrow connector or other component and run `appc-npm <type> [src]` with the [component type](#types-of-components) and optional path (defaulting to CWD).
 
 ```
 $ cd mywidget
@@ -76,8 +76,8 @@ $ appc-npm widget
 + alloy-widget-myWidget@1.0.1
 ```
 
-## Commands / Types
-You can use the following commands or types of components:
+## Types of Components
+You can package the following types of components:
 
 ### `module`
 Titanium modules. Run it in the [folder above the platform folders](https://github.com/viezel/NappDrawer) to package the most recent distribution ZIP file of each platform. Run it in a platform folder to package only that one.
