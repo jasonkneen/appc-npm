@@ -49,7 +49,7 @@ main({
 	}, _.keys(pkg));
 
 	if (_.size(missing) > 0) {
-		console.log('You might want to check if a shorter name\nis available on NPM and add these fields:');
+		console.log('You might want to add these fields before you publish:');
 		console.log();
 		console.log(JSON.stringify(missing, null, 2).replace(/^(\{\n|\})/mg, ''));
 	}
