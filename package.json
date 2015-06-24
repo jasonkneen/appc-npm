@@ -1,6 +1,6 @@
 {
   "name": "appc-npm",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Package components for Appcelerator Titanium, Alloy and Arrow projects for distribution via NPM.",
   "main": "index.js",
   "bin": {
