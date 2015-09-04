@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+var path = require('path'),
+	fs = require('fs');
+
 var _ = require('underscore');
 var updateNotifier = require('update-notifier');
 
@@ -13,8 +16,10 @@ var argv = process.argv.slice(2);
 var type = argv.shift();
 var src = argv.shift() || process.cwd();
 
-if (!type) {
+if (!type || ['-h', '--help'].indexOf(type) !== -1) {
 	console.log('Usage: appc-npm <type> [src]');
+	console.log();
+	console.log('Types: ' + fs.readdirSync(path.join(__dirname, '..', 'lib', 'types')).join(', ').replace(/\.js/g, ''));
 	console.log();
 	process.exit(0);
 }
