@@ -206,8 +206,12 @@ module.exports = function (opts, callback) {
 		},
 
 		writePackage: function (next) {
+			const options = {
+				spaces: 4,
+				EOL: "\n",
+			  };
 
-			return fs.outputJson(packagePath, pkg, function (err) {
+			return fs.outputJson(packagePath, pkg, options, function (err) {
 
 				if (err) {
 					return next(new Error('Failed to write package.json'));
